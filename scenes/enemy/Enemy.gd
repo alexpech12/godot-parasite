@@ -64,3 +64,6 @@ func collision_test(pos):
 func _on_area_entered(area):
     if area.name == "Player":
         area.damage(1)
+        
+func damage(amount):
+    queue_free()

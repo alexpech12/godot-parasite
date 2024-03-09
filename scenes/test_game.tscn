@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://ba662bcfeprmq"]
+
+[ext_resource type="Script" path="res://scenes/Game.gd" id="1_hkv8f"]
+[ext_resource type="PackedScene" uid="uid://dqqpw4eay3kl0" path="res://scenes/test_scene.tscn" id="2_exp03"]
+[ext_resource type="PackedScene" uid="uid://bbrc31qpmoqku" path="res://scenes/player/player.tscn" id="3_hx3ff"]
+[ext_resource type="PackedScene" uid="uid://dfyye551d3ash" path="res://scenes/projectile/projectile.tscn" id="4_pgs6f"]
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "current_room")]
+script = ExtResource("1_hkv8f")
+transition_time = 0.2
+player = NodePath("Player")
+current_room = NodePath("Room")
+
+[node name="Curtain" type="ColorRect" parent="."]
+z_index = 999
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 296.0
+offset_bottom = 200.0
+color = Color(0, 0, 0, 0)
+
+[node name="Room" parent="." instance=ExtResource("2_exp03")]
+
+[node name="Player" parent="." node_paths=PackedStringArray("room", "projectile") instance=ExtResource("3_hx3ff")]
+position = Vector2(136, 184)
+room = NodePath("../Room")
+projectile = NodePath("../Projectile")
+
+[node name="Projectile" parent="." instance=ExtResource("4_pgs6f")]
+position = Vector2(320, 32)
+
+[node name="UI" type="Node2D" parent="."]
+z_index = 100
+
+[node name="LeftBorder" type="ColorRect" parent="UI"]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 48.0
+offset_bottom = 200.0
+color = Color(0, 0, 0, 1)
+
+[node name="RightBorder" type="ColorRect" parent="UI"]
+offset_left = 240.0
+offset_top = -8.0
+offset_right = 296.0
+offset_bottom = 200.0
+color = Color(0, 0, 0, 1)
+
+[connection signal="transition" from="Room" to="." method="_on_room_transition"]

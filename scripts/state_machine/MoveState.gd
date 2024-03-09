@@ -23,9 +23,6 @@ func process(delta):
     at += 1
     if at <= subject.move_frames:
         subject.position = start.lerp(target, (at as float) / subject.move_frames)
-    
-    if subject.has_overlapping_bodies():
-        print_debug("Overlap")
         
     if !aborting && (subject.has_overlapping_areas() || subject.has_overlapping_bodies()):
         # Abort the movement

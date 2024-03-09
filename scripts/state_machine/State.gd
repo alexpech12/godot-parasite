@@ -22,3 +22,6 @@ func process(_delta):
     
 func next_state() -> State:
     return null
+    
+func facing_direction():
+    return Vector2.ZERO
