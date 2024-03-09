@@ -1,22 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgmedisd8jjpd"]
+[gd_scene load_steps=5 format=3 uid="uid://cgmedisd8jjpd"]
 
 [ext_resource type="Script" path="res://scenes/room/Room.gd" id="1_18mma"]
 [ext_resource type="PackedScene" uid="uid://b7ubxiqaj2fkx" path="res://scenes/tile_map.tscn" id="2_0epx1"]
 [ext_resource type="PackedScene" uid="uid://4ic03vnpgy1t" path="res://scenes/door/door.tscn" id="3_s7hof"]
+[ext_resource type="PackedScene" uid="uid://cgjmavhtmfi0y" path="res://scenes/enemy/enemy.tscn" id="4_33e0j"]
 
 [node name="Room" type="Node2D"]
 script = ExtResource("1_18mma")
+filepath = "levels/test/level01"
+enemy_scene = ExtResource("4_33e0j")
 
 [node name="TileMap" parent="." instance=ExtResource("2_0epx1")]
 
-[node name="Door" parent="." instance=ExtResource("3_s7hof")]
+[node name="DoorTop" parent="." instance=ExtResource("3_s7hof")]
 position = Vector2(144, -8)
-destination_scene = ""
+destination_location = 1
 
-[node name="Door2" parent="." instance=ExtResource("3_s7hof")]
+[node name="DoorBottom" parent="." instance=ExtResource("3_s7hof")]
+position = Vector2(144, 200)
+
+[node name="DoorLeft" parent="." instance=ExtResource("3_s7hof")]
 position = Vector2(40, 96)
 rotation = 1.5708
-destination_scene = ""
+destination_location = 3
 
-[connection signal="transition" from="Door" to="." method="_on_door_transition"]
-[connection signal="transition" from="Door2" to="." method="_on_door_transition"]
+[node name="DoorRight" parent="." instance=ExtResource("3_s7hof")]
+position = Vector2(248, 96)
+rotation = 1.5708
+destination_location = 2
+
+[connection signal="transition" from="DoorTop" to="." method="_on_door_transition"]
+[connection signal="transition" from="DoorBottom" to="." method="_on_door_transition"]
+[connection signal="transition" from="DoorLeft" to="." method="_on_door_transition"]
+[connection signal="transition" from="DoorRight" to="." method="_on_door_transition"]
