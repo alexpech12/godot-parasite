@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bbrc31qpmoqku"]
+[gd_scene load_steps=18 format=3 uid="uid://bbrc31qpmoqku"]
 
 [ext_resource type="Script" path="res://scenes/player/Player.gd" id="1_5mm0n"]
 [ext_resource type="Texture2D" uid="uid://cwl3776jnu6jc" path="res://images/player_test.png" id="2_wn1nu"]
@@ -162,11 +162,15 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="Node2D" node_paths=PackedStringArray("tilemap")]
-position = Vector2(136, 184)
+[sub_resource type="CircleShape2D" id="CircleShape2D_fn27e"]
+radius = 7.0
+
+[node name="Player" type="Area2D"]
 script = ExtResource("1_5mm0n")
-tilemap = NodePath("")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_7ywlv")
 animation = &"face_up"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fn27e")
