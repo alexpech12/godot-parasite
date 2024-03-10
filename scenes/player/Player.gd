@@ -5,6 +5,7 @@ extends Area2D
 @export var health = 5
 
 signal health_changed(health: int)
+signal game_over()
 
 @export var room: Room
 var tilemap: TileMap
@@ -52,6 +53,7 @@ func _process(delta):
         down = Input.is_action_pressed("ui_down"),
         left = Input.is_action_pressed("ui_left"),
         right = Input.is_action_pressed("ui_right"),
+        dead = dead()
         #attack = Input.is_action_pressed("attack")
     })
     
@@ -69,8 +71,10 @@ func _process(delta):
         
     play_animation(get_current_animation())
        
-    
 func get_current_animation():
+    if dead():
+        return "death"
+
     var animation_string = "{state}_{direction}"
     var state = null
     
@@ -102,8 +106,29 @@ func collision_test(pos):
 func receive_damage(amount):
     health -= amount
     print_debug("Damaged " + str(amount))
-    health_changed.emit(health)
+    
+    if dead():
+        # Game over
         
+        await get_tree().create_timer(2.0)
+        print_debug("GAME OVER")
+        
+        game_over.emit()
+    else:
+        var tween = get_tree().create_tween()
+        tween.tween_property($AnimatedSprite2D, "modulate", Color.RED, 0.1)
+        tween.tween_property($AnimatedSprite2D, "modulate", Color.WHITE, 0.1)
+        health_changed.emit(health)
+        
+func dead():
+    return health <= 0
+
+func on_death_entered():
+    var death_sprite = $AnimatedSprite2D.duplicate()
+    add_sibling(death_sprite)
+    death_sprite.position = position
+    death_sprite.play("death")
+
 func attacking():
     return attack_cooldown > 0
     

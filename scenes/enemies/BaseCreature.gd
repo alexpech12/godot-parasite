@@ -21,7 +21,6 @@ func _ready():
     current_state = IdleState.new(self)
     
     player = get_tree().root.find_child("Player", true, false)
-    assert(player, "player could not be found")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
