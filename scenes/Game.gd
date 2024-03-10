@@ -4,6 +4,8 @@ extends Node2D
 @export var ui: UI
 @export var room_scene: PackedScene
  
+@export var starting_room_override: String
+
 enum TransitionState { None, FadingOut, Loading, FadingIn }
 var transition_state = TransitionState.None
 var transition_scene: PackedScene
@@ -12,19 +14,21 @@ var transition_destination: Vector2i
 
 var t = 0.0
 
-@export var current_room: Node2D
+var current_room: Node2D
 
 var current_room_definition: Level.RoomDefinition
 
 func _ready():
     $Level.generate()
     
-    load_room($Level.starting_room())
+    if starting_room_override:
+        load_room_from_file($Level.starting_room(), starting_room_override)
+    else:
+        load_room($Level.starting_room())
     
     player.enter_room(current_room)
     
-func load_room(room_definition):
-    
+func find_random_matching_file(room_definition):
     # Find file matching definition
     # Path format is res://levels/{type}/{n?}{e?}{w?}{s?}/*
     # Or, res://levels/{type}/* for a level without specific connections
@@ -47,12 +51,15 @@ func load_room(room_definition):
         
     print_debug("Using ", selected_file)
     
+    return selected_file
+    
+func load_room_from_file(room_definition, filename):
     # Instantiate room
     var room = room_scene.instantiate()
     add_child(room)
         
     # Apply file to room
-    room.configure(selected_file, room_definition)
+    room.configure(filename, room_definition)
     
     # Set player location, if room provides one
     if room.player_start:
@@ -64,6 +71,10 @@ func load_room(room_definition):
         
     current_room_definition = room_definition
     current_room = room
+    
+func load_room(room_definition):
+    var filename = find_random_matching_file(room_definition)
+    load_room_from_file(room_definition, filename)
 
 func _process(delta):
     match transition_state:
@@ -82,10 +93,6 @@ func _process(delta):
             
             load_room(destination_room_definition)
             
-            #var instance = transition_scene.instantiate()
-            #add_child(instance)
-            #current_room = instance
-            #(current_room as Room).transition.connect(_on_room_transition)
             transition_state = TransitionState.FadingIn
             player.position = transition_location
             

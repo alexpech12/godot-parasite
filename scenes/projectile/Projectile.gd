@@ -14,7 +14,7 @@ func _process(delta):
     position += direction * speed
 
 func _on_area_entered(area):
-    area.damage(damage)
+    area.receive_damage(damage)
     queue_free()
 
 

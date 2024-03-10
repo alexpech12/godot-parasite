@@ -5,6 +5,9 @@ extends State
 var animation_name = "face"
 
 func next_state():
+    if inputs.get("dead"):
+        return DeathState.new(subject)
+        
     var transitions = [
         {
             'input': "up",

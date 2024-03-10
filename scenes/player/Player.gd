@@ -9,6 +9,9 @@ var tilemap: TileMap
 
 @export var projectile: Projectile
 
+
+var creature_type = BaseCreature.CreatureType.Player
+
 var facing_direction = Vector2i.UP
 
 var sprite: AnimatedSprite2D
@@ -90,12 +93,8 @@ func collision_test(pos):
         return data.get_custom_data("wall")
 
     return false
-
-
-func _on_area_entered(area):
-    print_debug("Area entered - " + area.name)
     
-func damage(amount):
+func receive_damage(amount):
     print_debug("Damaged " + str(amount))
         
 func attacking():

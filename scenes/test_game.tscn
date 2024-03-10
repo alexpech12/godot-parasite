@@ -6,18 +6,16 @@
 [ext_resource type="PackedScene" uid="uid://dfyye551d3ash" path="res://scenes/projectile/projectile.tscn" id="4_pgs6f"]
 [ext_resource type="PackedScene" uid="uid://b8yjady50laal" path="res://scenes/ui/ui.tscn" id="5_6oul6"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "current_room")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_hkv8f")
 transition_time = 0.2
 player = NodePath("Player")
-current_room = NodePath("Room")
 
 [node name="Room" parent="." instance=ExtResource("2_exp03")]
 
 [node name="Player" parent="." node_paths=PackedStringArray("room", "projectile") instance=ExtResource("3_hx3ff")]
 position = Vector2(136, 184)
 room = NodePath("../Room")
-move_frames = null
 projectile = NodePath("../Projectile")
 
 [node name="Projectile" parent="." instance=ExtResource("4_pgs6f")]

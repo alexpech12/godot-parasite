@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/room/Room.gd" id="1_7v2ip"]
 [ext_resource type="PackedScene" uid="uid://b7ubxiqaj2fkx" path="res://scenes/tile_map.tscn" id="2_0u7n5"]
-[ext_resource type="PackedScene" uid="uid://cgjmavhtmfi0y" path="res://scenes/enemy/enemy.tscn" id="3_15mmi"]
+[ext_resource type="PackedScene" uid="uid://cgjmavhtmfi0y" path="res://scenes/enemies/parasite_baby.tscn" id="3_15mmi"]
 [ext_resource type="PackedScene" uid="uid://4ic03vnpgy1t" path="res://scenes/door/door.tscn" id="4_8jv04"]
 
 [node name="Room" type="Node2D"]

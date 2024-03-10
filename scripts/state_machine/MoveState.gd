@@ -20,7 +20,15 @@ func _init(subject, movement: Vector2):
     # TODO: In future, this could became a 'bump into wall' animation
     #if subject.collision_test(target):
         #self.target = subject.position
-    
+
+func enter():
+    if subject.has_method("on_move_entered"):
+        subject.on_move_entered()
+ 
+func exit():
+    if subject.has_method("on_move_exited"):
+        subject.on_move_exited(!aborting)
+
 func process(delta):
     t += 1
     at += 1
@@ -38,11 +46,17 @@ func process(delta):
         snap_position()
 
 func next_state():
+    if inputs.get("dead"):
+        return DeathState.new(subject)
+        
     if not movement_complete():
         return null
         
     var next_state = IdleState.new(subject)
     
+    if aborting:
+        return next_state
+
     # Allow the idle state to transitioning straight back to a moving state
     # without waiting for an update cycle if the inputs are still asserted
     next_state.set_inputs(inputs)

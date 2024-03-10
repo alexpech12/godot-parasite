@@ -1,18 +1,18 @@
 [gd_scene load_steps=8 format=3 uid="uid://cgjmavhtmfi0y"]
 
-[ext_resource type="Script" path="res://scenes/enemy/Enemy.gd" id="1_dcx5w"]
-[ext_resource type="Texture2D" uid="uid://up4jnqous41d" path="res://images/enemy_test.png" id="2_lm2gu"]
+[ext_resource type="Script" path="res://scenes/enemies/ParasiteBaby.gd" id="1_magp3"]
+[ext_resource type="Texture2D" uid="uid://up4jnqous41d" path="res://images/enemy_test.png" id="2_71y6r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ijl2j"]
-atlas = ExtResource("2_lm2gu")
+atlas = ExtResource("2_71y6r")
 region = Rect2(0, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ckoxr"]
-atlas = ExtResource("2_lm2gu")
+atlas = ExtResource("2_71y6r")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1pkap"]
-atlas = ExtResource("2_lm2gu")
+atlas = ExtResource("2_71y6r")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_oabn3"]
@@ -40,8 +40,10 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_211v5"]
 radius = 7.0
 
-[node name="Enemy" type="Area2D"]
-script = ExtResource("1_dcx5w")
+[node name="ParasiteBaby" type="Area2D"]
+collision_layer = 4
+collision_mask = 15
+script = ExtResource("1_magp3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_oabn3")

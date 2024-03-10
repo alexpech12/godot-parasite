@@ -16,7 +16,8 @@ var Symbol = {
     Player = 'P',
     Entrance = 'E',
     Exit = 'G',
-    Enemy01 = 'q'    
+    ParasiteBaby = 'q',
+    MonsterBaby = 'a' 
 }
 
 func configure(filepath: String, definition: Level.RoomDefinition):
@@ -50,8 +51,10 @@ func apply_file():
             match row[x]:
                 Symbol.Wall:
                     add_wall(x, y)
-                Symbol.Enemy01:
-                    add_enemy(x, y)
+                Symbol.ParasiteBaby:
+                    add_enemy("parasite_baby", x, y)
+                Symbol.MonsterBaby:
+                    add_enemy("monster_baby", x, y)
                 Symbol.Player:
                     player_start = map_to_world(x, y) + Vector2(8, 8)
 
@@ -75,15 +78,23 @@ func apply_definition():
                 Level.RoomDefinition.Direction.Up:
                     add_wall(5, 0)
                     add_wall(6, 0)
+                    add_wall(5, -1)
+                    add_wall(6, -1)
                 Level.RoomDefinition.Direction.Down:
                     add_wall(5, 11)
                     add_wall(6, 11)
+                    add_wall(5, 12)
+                    add_wall(6, 12)
                 Level.RoomDefinition.Direction.Left:
                     add_wall(0, 5)
                     add_wall(0, 6)
+                    add_wall(-1, 5)
+                    add_wall(-1, 6)
                 Level.RoomDefinition.Direction.Right:
                     add_wall(11, 5)
                     add_wall(11, 6)
+                    add_wall(12, 5)
+                    add_wall(12, 6)
 
 func _on_door_transition(scene, player_location):
     transition.emit(scene, player_location)
@@ -94,7 +105,8 @@ func get_tilemap():
 func add_wall(x, y):
     $TileMap.set_cells_terrain_connect (0, [Vector2i(3+x, y)], 0, 0)
     
-func add_enemy(x, y):
+func add_enemy(type, x, y):
+    var enemy_scene = load("res://scenes/enemies/%s.tscn" % type)
     var enemy = enemy_scene.instantiate()
     add_child(enemy)
     enemy.position = map_to_world(x, y) + Vector2(8, 8)
