@@ -19,7 +19,8 @@ var Symbol = {
     ParasiteBaby = 'q',
     ParasiteJuvenile = 'w',
     ParasiteAdult = 'e',
-    MonsterBaby = 'a' 
+    MonsterBaby = 'a' ,
+    MonsterJuvenile = 's' 
 }
 
 func configure(filepath: String, definition: Level.RoomDefinition):
@@ -61,6 +62,8 @@ func apply_file():
                     add_enemy("parasite_adult", x, y)
                 Symbol.MonsterBaby:
                     add_enemy("monster_baby", x, y)
+                Symbol.MonsterJuvenile:
+                    add_enemy("monster_juvenile", x, y)
                 Symbol.Player:
                     player_start = map_to_world(x, y) + Vector2(8, 8)
 

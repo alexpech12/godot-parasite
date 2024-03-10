@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://cweg3gj7c1rxp"]
+
+[ext_resource type="PackedScene" uid="uid://bx6ejmm0gw07c" path="res://scenes/enemies/base_creature.tscn" id="1_bby1n"]
+[ext_resource type="Texture2D" uid="uid://b13qtv66us7c5" path="res://images/monsters.png" id="2_6rakr"]
+[ext_resource type="Script" path="res://scenes/enemies/MonsterJuvenile.gd" id="2_coiic"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p0slt"]
+atlas = ExtResource("2_6rakr")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cocs7"]
+atlas = ExtResource("2_6rakr")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jqvf1"]
+atlas = ExtResource("2_6rakr")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_urvvs"]
+atlas = ExtResource("2_6rakr")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_26xsp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p0slt")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cocs7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jqvf1")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_urvvs")
+}],
+"loop": true,
+"name": &"step",
+"speed": 5.0
+}]
+
+[node name="MonsterJuvenile" instance=ExtResource("1_bby1n")]
+script = ExtResource("2_coiic")
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_26xsp")
+animation = &"death"

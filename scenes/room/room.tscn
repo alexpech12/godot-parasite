@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgmedisd8jjpd"]
+[gd_scene load_steps=6 format=3 uid="uid://cgmedisd8jjpd"]
 
 [ext_resource type="Script" path="res://scenes/room/Room.gd" id="1_18mma"]
 [ext_resource type="PackedScene" uid="uid://b7ubxiqaj2fkx" path="res://scenes/tile_map.tscn" id="2_0epx1"]
 [ext_resource type="PackedScene" uid="uid://cgjmavhtmfi0y" path="res://scenes/enemies/parasite_baby.tscn" id="2_s0awh"]
 [ext_resource type="PackedScene" uid="uid://4ic03vnpgy1t" path="res://scenes/door/door.tscn" id="3_s7hof"]
+[ext_resource type="Texture2D" uid="uid://0nlwv1pvi0yx" path="res://images/floor.png" id="5_elktd"]
 
 [node name="Room" type="Node2D"]
 script = ExtResource("1_18mma")
@@ -27,6 +28,13 @@ destination_location = 3
 position = Vector2(248, 96)
 rotation = 1.5708
 destination_location = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -10
+offset_right = 288.0
+offset_bottom = 192.0
+texture = ExtResource("5_elktd")
+stretch_mode = 1
 
 [connection signal="transition" from="DoorTop" to="." method="_on_door_transition"]
 [connection signal="transition" from="DoorBottom" to="." method="_on_door_transition"]
