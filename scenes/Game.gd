@@ -21,6 +21,8 @@ func _ready():
     
     load_room($Level.starting_room())
     
+    player.enter_room(current_room)
+    
 func load_room(room_definition):
     
     # Find file matching definition

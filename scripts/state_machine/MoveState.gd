@@ -8,10 +8,13 @@ var t = 0 # t for the state
 var at = 0 # t for the animation
 var aborting = false
 
-func _init(subject, animation, movement):
-    super(subject, animation)
+var animation_name = "step"
+
+func _init(subject, movement: Vector2):
+    super(subject)
     self.start = subject.position
     target = subject.position + movement
+    subject.facing_direction = Vector2i(movement.normalized().x, movement.normalized().y)
     
     # Prevent the subject from walking into a wall
     # TODO: In future, this could became a 'bump into wall' animation
@@ -35,11 +38,19 @@ func process(delta):
         snap_position()
 
 func next_state():
-    if movement_complete():
-        return _next_state()
+    if not movement_complete():
+        return null
+        
+    var next_state = IdleState.new(subject)
     
-func _next_state():
-    assert(false, "_next_state must be implemented!")
+    # Allow the idle state to transitioning straight back to a moving state
+    # without waiting for an update cycle if the inputs are still asserted
+    next_state.set_inputs(inputs)
+    var next_next_state = next_state.next_state()
+    if next_next_state:
+        return next_next_state
+    else:
+        return next_state
     
 func movement_complete():
     return t >= subject.move_frames

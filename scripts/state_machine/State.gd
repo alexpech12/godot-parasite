@@ -1,15 +1,13 @@
 class_name State
 
 var subject
-var animation
 var inputs
 
-func _init(subject, animation):
+func _init(subject):
     self.subject = subject
-    self.animation = animation
     
 func enter():
-    subject.play_animation(animation)
+    pass
     
 func exit():
     pass
@@ -22,6 +20,3 @@ func process(_delta):
     
 func next_state() -> State:
     return null
-    
-func facing_direction():
-    return Vector2.ZERO

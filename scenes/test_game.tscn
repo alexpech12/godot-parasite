@@ -17,6 +17,7 @@ current_room = NodePath("Room")
 [node name="Player" parent="." node_paths=PackedStringArray("room", "projectile") instance=ExtResource("3_hx3ff")]
 position = Vector2(136, 184)
 room = NodePath("../Room")
+move_frames = null
 projectile = NodePath("../Projectile")
 
 [node name="Projectile" parent="." instance=ExtResource("4_pgs6f")]

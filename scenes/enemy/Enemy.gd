@@ -6,6 +6,8 @@ extends Area2D
 var STEP_SIZE = 16
 var move_frames = 10
 
+var facing_direction = Vector2i.DOWN
+
 var sprite: AnimatedSprite2D
 var current_state: State
 
@@ -15,7 +17,7 @@ var t = 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
     sprite = $AnimatedSprite2D
-    current_state = IdleDownState.new(self)
+    current_state = IdleState.new(self)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

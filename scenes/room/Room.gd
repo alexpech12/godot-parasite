@@ -97,7 +97,7 @@ func add_wall(x, y):
 func add_enemy(x, y):
     var enemy = enemy_scene.instantiate()
     add_child(enemy)
-    enemy.position = map_to_world(x, y)
+    enemy.position = map_to_world(x, y) + Vector2(8, 8)
     
 func map_to_world(x, y):
     return Vector2((x+3) * 16, y * 16)

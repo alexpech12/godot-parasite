@@ -9,6 +9,8 @@ var tilemap: TileMap
 
 @export var projectile: Projectile
 
+var facing_direction = Vector2i.UP
+
 var sprite: AnimatedSprite2D
 var STEP_SIZE = 16
 var attack_time = 0.5
@@ -20,13 +22,13 @@ var paused = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
     sprite = $AnimatedSprite2D
-    current_state = IdleUpState.new(self)
+    current_state = IdleState.new(self)
     current_state.enter()
     
 func enter_room(room):
     tilemap = room.get_tilemap()
     paused = false
-    current_state = IdleUpState.new(self)
+    current_state = IdleState.new(self)
     current_state.enter()
     
 func exit_room(room):
@@ -56,7 +58,28 @@ func _process(delta):
     attack_cooldown -= delta
     if Input.is_action_pressed("attack") && attack_cooldown <= 0:
         attack()
-         
+        
+    play_animation(get_current_animation())
+       
+    
+func get_current_animation():
+    var animation_string = "{state}_{direction}"
+    var state = null
+    
+    if attacking():
+        state = "attack"
+    else:
+        state = current_state.animation_name
+        
+    var direction = null
+    if facing_direction == Vector2i.UP: direction = "up"
+    elif facing_direction == Vector2i.DOWN: direction = "down"
+    elif facing_direction == Vector2i.LEFT: direction = "left"
+    elif facing_direction == Vector2i.RIGHT: direction = "right"
+    
+    return animation_string.format({"state": state, "direction": direction})
+    
+      
 func play_animation(animation):
     sprite.play(animation)
 
@@ -74,18 +97,17 @@ func _on_area_entered(area):
     
 func damage(amount):
     print_debug("Damaged " + str(amount))
-    
-func facing_direction():
-    print_debug(current_state.facing_direction())
-    current_state.facing_direction()
         
+func attacking():
+    return attack_cooldown > 0
+    
 func attack():
     print_debug("Attacking!")
     #var p = projectile.instantiate()
     var p = projectile.duplicate()
     p.position = position
-    print_debug("Setting direction to " + str(facing_direction()))
-    p.direction = current_state.facing_direction()
+    #p.direction = current_state.facing_direction()
+    p.direction = facing_direction
     if p.direction.x > 0:
         p.rotate(deg_to_rad(90))
     elif p.direction.y > 0:

@@ -2,22 +2,24 @@ class_name IdleState
 
 extends State
 
+var animation_name = "face"
+
 func next_state():
     var transitions = [
         {
             'input': "up",
-            'next_state': MoveUpState
+            'movement': Vector2(0, -subject.STEP_SIZE)
         },{
             'input': "left",
-            'next_state': MoveLeftState
+            'movement': Vector2(-subject.STEP_SIZE, 0)
         },{
             'input': "down",
-            'next_state': MoveDownState
+            'movement': Vector2(0, subject.STEP_SIZE)
         },{
             'input': "right",
-            'next_state': MoveRightState
+            'movement': Vector2(subject.STEP_SIZE, 0)
         },
     ]
     for transition in transitions:
         if inputs.get(transition['input']):
-            return transition['next_state'].new(subject)
+            return MoveState.new(subject, transition['movement'])
