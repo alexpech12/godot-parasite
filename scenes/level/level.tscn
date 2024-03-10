@@ -4,15 +4,12 @@
 
 [node name="Level" type="Node2D" node_paths=PackedStringArray("debug_start", "debug_normal", "debug_end", "debug_treasure", "debug_connection")]
 script = ExtResource("1_7hkhb")
-secondary_path_count = 2
-secondary_path_length = 3
 generate_debug = true
 debug_start = NodePath("Debug/DebugStart")
 debug_normal = NodePath("Debug/DebugNormal")
 debug_end = NodePath("Debug/DebugEnd")
 debug_treasure = NodePath("Debug/DebugTreasure")
 debug_connection = NodePath("Debug/DebugConnection")
-debug_scale = 12.0
 
 [node name="Debug" type="Node2D" parent="."]
 position = Vector2(128, 128)

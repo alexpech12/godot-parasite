@@ -1,22 +1,25 @@
+class_name Level
+
 extends Node2D
 
 #@export var room_count = 10
 @export var main_path_length = 10
-@export var secondary_path_count = 3
-@export var secondary_path_length = 4
+@export var secondary_path_count = 2
+@export var secondary_path_length = 3
 
 enum RoomType {
     Start, End, Normal, Treasure
 }
 
-var RoomTypeString = {
-    RoomType.Start: 'start',
-    RoomType.End: 'end',
-    RoomType.Normal: 'normal',
-    RoomType.Treasure: 'treasure'
-}
 
 class RoomDefinition:
+    var RoomTypeString = {
+        RoomType.Start: 'start',
+        RoomType.End: 'end',
+        RoomType.Normal: 'normal',
+        RoomType.Treasure: 'treasure'
+    }
+
     var location: Vector2i
     var type: RoomType
     var key: String
@@ -28,10 +31,24 @@ class RoomDefinition:
         Direction.Right: null,
     }
     
+    static func key_for_location(x, y):
+        return str(x) + "," + str(y)
+        
     func _init(x: int, y: int, type = RoomType.Normal):
         location = Vector2i(x,y)
         self.type = type
-        key = str(x) + "," + str(y)
+        key = key_for_location(x,y)
+    
+    func type_string():
+        return RoomTypeString[type]
+        
+    func connections_string():
+        var str = ""
+        if connections[Direction.Up]: str = str + "n"
+        if connections[Direction.Right]: str = str + "e"
+        if connections[Direction.Left]: str = str + "w"
+        if connections[Direction.Down]: str = str + "s"
+        return str
         
     func neighbour_locations():
         return [
@@ -63,18 +80,33 @@ class RoomDefinition:
         
 
 var rooms = {}
-#var visited_rooms = []
 var focussed_room
 
+@export var generate_on_ready = false
 @export var generate_debug = false
 @export var debug_start: Node
 @export var debug_normal: Node
 @export var debug_end: Node
 @export var debug_treasure: Node
 @export var debug_connection: Node
-@export var debug_scale = 10.0
+@export var debug_scale = 12.0
+
+func starting_room() -> RoomDefinition:
+    for key in rooms:
+        var room = rooms[key]
+        if room.type == RoomType.Start:
+            return room
+    return null
+
+func get_room(location: Vector2i) -> RoomDefinition:
+    var key = RoomDefinition.key_for_location(location.x, location.y)
+    return rooms.get(key)
 
 func _ready():
+    if generate_on_ready:
+        generate()
+
+func generate():
     var result = null
     while result != 'OK':
         rooms = {}

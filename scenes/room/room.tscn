@@ -7,7 +7,6 @@
 
 [node name="Room" type="Node2D"]
 script = ExtResource("1_18mma")
-filepath = "levels/test/level01"
 enemy_scene = ExtResource("4_33e0j")
 
 [node name="TileMap" parent="." instance=ExtResource("2_0epx1")]

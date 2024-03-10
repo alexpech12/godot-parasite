@@ -1,0 +1,24 @@
+[gd_scene load_steps=7 format=3 uid="uid://cgxg32ixv4mmv"]
+
+[ext_resource type="Script" path="res://scenes/Game.gd" id="1_girdn"]
+[ext_resource type="PackedScene" uid="uid://cgmedisd8jjpd" path="res://scenes/room/room.tscn" id="2_crknf"]
+[ext_resource type="PackedScene" uid="uid://b353btab7e6eo" path="res://scenes/level/level.tscn" id="2_xmhvx"]
+[ext_resource type="PackedScene" uid="uid://b8yjady50laal" path="res://scenes/ui/ui.tscn" id="3_r17wv"]
+[ext_resource type="PackedScene" uid="uid://bbrc31qpmoqku" path="res://scenes/player/player.tscn" id="4_nbtyo"]
+[ext_resource type="PackedScene" uid="uid://dfyye551d3ash" path="res://scenes/projectile/projectile.tscn" id="5_cwbui"]
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "ui")]
+script = ExtResource("1_girdn")
+player = NodePath("Player")
+ui = NodePath("UI")
+room_scene = ExtResource("2_crknf")
+
+[node name="Level" parent="." instance=ExtResource("2_xmhvx")]
+generate_debug = false
+
+[node name="UI" parent="." instance=ExtResource("3_r17wv")]
+
+[node name="Player" parent="." node_paths=PackedStringArray("projectile") instance=ExtResource("4_nbtyo")]
+projectile = NodePath("../Projectile")
+
+[node name="Projectile" parent="." instance=ExtResource("5_cwbui")]

@@ -1,17 +1,26 @@
+class_name Door
+
 extends Area2D
 
 enum DestinationLocation { Top, Bottom, Left, Right }
 
-@export var destination_scene: String
+#@export var destination_scene: String
+@export var destination_coordinates: Vector2i
 @export var destination_location: DestinationLocation
 
-signal transition(scene: PackedScene, player_location: Vector2)
+signal transition(destination: Vector2i, player_location: Vector2)
 #var next_scene = preload("res://scenes/test_scene_2.tscn")
 
+func set_destination(destination):
+    destination_coordinates = destination
+
 func _on_area_entered(_area):
+    
+    print_debug("Moving to ", destination_coordinates)
+    transition.emit(destination_coordinates, player_destination())
     #print_debug("Transition to " + str(destination_scene.resource_name()))
-    var scene = load("res://scenes/" + destination_scene + ".tscn")
-    transition.emit(scene, player_destination())
+    #var scene = load("res://scenes/" + destination_scene + ".tscn")
+    #transition.emit(scene, player_destination())
     #get_tree().change_scene_to_packed(destination_scene)
     
 func player_destination():

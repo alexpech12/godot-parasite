@@ -15,19 +15,28 @@ var attack_time = 0.5
 var attack_cooldown = 0
 
 var current_state: State
+var paused = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    tilemap = room.get_tilemap()
     sprite = $AnimatedSprite2D
     current_state = IdleUpState.new(self)
     current_state.enter()
     
 func enter_room(room):
     tilemap = room.get_tilemap()
+    paused = false
+    current_state = IdleUpState.new(self)
+    current_state.enter()
+    
+func exit_room(room):
+    paused = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+    if paused:
+        return
+
     current_state.set_inputs({
         up = Input.is_action_pressed("ui_up"),
         down = Input.is_action_pressed("ui_down"),
