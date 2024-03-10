@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://b1nrb0xrbb3qr"]
+
+[ext_resource type="PackedScene" uid="uid://bx6ejmm0gw07c" path="res://scenes/enemies/base_creature.tscn" id="1_cs01x"]
+[ext_resource type="Texture2D" uid="uid://c6d52qmbpp5de" path="res://images/parasites.png" id="2_eq8qc"]
+[ext_resource type="Script" path="res://scenes/enemies/ParasiteAdult.gd" id="2_txaxd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_etyok"]
+atlas = ExtResource("2_eq8qc")
+region = Rect2(48, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_607wg"]
+atlas = ExtResource("2_eq8qc")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edgif"]
+atlas = ExtResource("2_eq8qc")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xfnkh"]
+atlas = ExtResource("2_eq8qc")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xl0l8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etyok")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_607wg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edgif")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xfnkh")
+}],
+"loop": true,
+"name": &"step",
+"speed": 5.0
+}]
+
+[node name="ParasiteAdult" instance=ExtResource("1_cs01x")]
+script = ExtResource("2_txaxd")
+duplication_energy = 1
+health = 5
+damage = 3
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_xl0l8")

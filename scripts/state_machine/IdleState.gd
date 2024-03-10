@@ -2,7 +2,7 @@ class_name IdleState
 
 extends State
 
-var animation_name = "face"
+var animation_name = "idle"
 
 func next_state():
     if inputs.get("dead"):

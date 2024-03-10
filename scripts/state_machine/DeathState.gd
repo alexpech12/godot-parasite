@@ -5,7 +5,9 @@ extends State
 var animation_name = "death"
 
 func enter():
-    # TODO: Spawn something to play a death animation
+    if subject.has_method("on_death_entered"):
+        subject.on_death_entered()
+    
     subject.queue_free()
     
 func next_state():

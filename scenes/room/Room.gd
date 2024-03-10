@@ -17,6 +17,8 @@ var Symbol = {
     Entrance = 'E',
     Exit = 'G',
     ParasiteBaby = 'q',
+    ParasiteJuvenile = 'w',
+    ParasiteAdult = 'e',
     MonsterBaby = 'a' 
 }
 
@@ -53,6 +55,10 @@ func apply_file():
                     add_wall(x, y)
                 Symbol.ParasiteBaby:
                     add_enemy("parasite_baby", x, y)
+                Symbol.ParasiteJuvenile:
+                    add_enemy("parasite_juvenile", x, y)
+                Symbol.ParasiteAdult:
+                    add_enemy("parasite_adult", x, y)
                 Symbol.MonsterBaby:
                     add_enemy("monster_baby", x, y)
                 Symbol.Player:

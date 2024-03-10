@@ -14,13 +14,27 @@ var facing_direction = Vector2i.DOWN
 
 var current_state: State
 
+var player: Player
+    
 # Called when the node enters the scene tree for the first time.
 func _ready():
     current_state = IdleState.new(self)
+    
+    player = get_tree().root.find_child("Player", true, false)
+    assert(player, "player could not be found")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
     process_state_machine(get_inputs(delta), delta)
+    
+    play_animation(get_current_animation())
+
+func get_current_animation():
+    var animation_string = current_state.animation_name
+    return animation_string
+    
+func play_animation(animation):
+    $AnimatedSprite2D.play(animation)
 
 func get_inputs(delta):
     return {}
@@ -66,6 +80,17 @@ func on_touched_by_parasite(parasite):
 func receive_damage(amount):
     print_debug(amount, " damage, (", health, " -> ", health - amount, ")")
     health -= amount
+    var tween = get_tree().create_tween()
+    tween.tween_property($AnimatedSprite2D, "modulate", Color.RED, 0.1)
+    tween.tween_property($AnimatedSprite2D, "modulate", Color.WHITE, 0.1)
         
 func dead():
     return health <= 0
+    
+func on_death_entered():
+    print_debug("on_death_entered()")
+    var death_sprite = $AnimatedSprite2D.duplicate()
+    add_sibling(death_sprite)
+    death_sprite.position = position
+    death_sprite.play("death")
+    

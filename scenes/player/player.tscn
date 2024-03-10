@@ -102,7 +102,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_l3njk")
 }],
 "loop": true,
-"name": &"face_down",
+"name": &"idle_down",
 "speed": 5.0
 }, {
 "frames": [{
@@ -110,7 +110,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_by120")
 }],
 "loop": true,
-"name": &"face_left",
+"name": &"idle_left",
 "speed": 5.0
 }, {
 "frames": [{
@@ -118,7 +118,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_0ok8k")
 }],
 "loop": true,
-"name": &"face_right",
+"name": &"idle_right",
 "speed": 5.0
 }, {
 "frames": [{
@@ -126,7 +126,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_nw30h")
 }],
 "loop": true,
-"name": &"face_up",
+"name": &"idle_up",
 "speed": 5.0
 }, {
 "frames": [{
@@ -172,6 +172,7 @@ script = ExtResource("1_5mm0n")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_7ywlv")
+animation = &"idle_left"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_fn27e")
