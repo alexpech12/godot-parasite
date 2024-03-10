@@ -1,0 +1,74 @@
+[gd_scene load_steps=2 format=3 uid="uid://b353btab7e6eo"]
+
+[ext_resource type="Script" path="res://scenes/level/Level.gd" id="1_7hkhb"]
+
+[node name="Level" type="Node2D" node_paths=PackedStringArray("debug_start", "debug_normal", "debug_end", "debug_treasure", "debug_connection")]
+script = ExtResource("1_7hkhb")
+secondary_path_count = 2
+secondary_path_length = 3
+generate_debug = true
+debug_start = NodePath("Debug/DebugStart")
+debug_normal = NodePath("Debug/DebugNormal")
+debug_end = NodePath("Debug/DebugEnd")
+debug_treasure = NodePath("Debug/DebugTreasure")
+debug_connection = NodePath("Debug/DebugConnection")
+debug_scale = 12.0
+
+[node name="Debug" type="Node2D" parent="."]
+position = Vector2(128, 128)
+
+[node name="DebugStart" type="ColorRect" parent="Debug"]
+offset_left = -120.0
+offset_top = 64.0
+offset_right = -112.0
+offset_bottom = 72.0
+color = Color(0, 0.756863, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="DebugEnd" type="ColorRect" parent="Debug"]
+offset_left = -72.0
+offset_top = 64.0
+offset_right = -64.0
+offset_bottom = 72.0
+color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="DebugNormal" type="ColorRect" parent="Debug"]
+offset_left = -96.0
+offset_top = 64.0
+offset_right = -88.0
+offset_bottom = 72.0
+color = Color(0.298039, 0.509804, 1, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="DebugTreasure" type="ColorRect" parent="Debug"]
+offset_left = -48.0
+offset_top = 64.0
+offset_right = -40.0
+offset_bottom = 72.0
+color = Color(1, 0.921569, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="DebugConnection" type="Control" parent="Debug"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -29.0
+offset_top = 69.0
+offset_right = -19.0
+offset_bottom = 79.0
+
+[node name="ColorRect" type="ColorRect" parent="Debug/DebugConnection"]
+layout_mode = 0
+offset_left = -4.0
+offset_top = 2.0
+offset_right = 4.0
+offset_bottom = 3.0
+color = Color(0.760784, 0.47451, 0.227451, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Debug/DebugConnection"]
+layout_mode = 0
+offset_left = -5.0
+offset_top = 1.0
+offset_right = -2.0
+offset_bottom = 4.0
+color = Color(0.760784, 0.47451, 0.227451, 1)
