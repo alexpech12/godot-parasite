@@ -2,6 +2,10 @@ class_name Player
 
 extends Area2D
 
+@export var health = 5
+
+signal health_changed(health: int)
+
 @export var room: Room
 var tilemap: TileMap
 
@@ -27,6 +31,7 @@ func _ready():
     sprite = $AnimatedSprite2D
     current_state = IdleState.new(self)
     current_state.enter()
+    health_changed.emit(health)
     
 func enter_room(room):
     tilemap = room.get_tilemap()
@@ -95,7 +100,9 @@ func collision_test(pos):
     return false
     
 func receive_damage(amount):
+    health -= amount
     print_debug("Damaged " + str(amount))
+    health_changed.emit(health)
         
 func attacking():
     return attack_cooldown > 0
