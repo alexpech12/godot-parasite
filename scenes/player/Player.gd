@@ -14,6 +14,8 @@ var tilemap: TileMap
 
 @export var projectile: Projectile
 
+@export var attack_time = 0.5
+
 
 var creature_type = BaseCreature.CreatureType.Player
 
@@ -21,7 +23,6 @@ var facing_direction = Vector2i.UP
 
 var sprite: AnimatedSprite2D
 var STEP_SIZE = 16
-var attack_time = 0.5
 var attack_cooldown = 0
 
 var current_state: State

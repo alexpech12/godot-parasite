@@ -1,17 +1,17 @@
 [gd_scene load_steps=6 format=3 uid="uid://dfyye551d3ash"]
 
 [ext_resource type="Script" path="res://scenes/projectile/Projectile.gd" id="1_vjaap"]
-[ext_resource type="Texture2D" uid="uid://vsb78cd0f10c" path="res://images/projectile_test.png" id="2_eawy6"]
+[ext_resource type="Texture2D" uid="uid://dqxmsdi6jkrfm" path="res://images/projectile.png" id="2_cc7jm"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yy42p"]
-atlas = ExtResource("2_eawy6")
+[sub_resource type="AtlasTexture" id="AtlasTexture_3uqth"]
+atlas = ExtResource("2_cc7jm")
 region = Rect2(0, 0, 8, 8)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4oj8v"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yy42p")
+"texture": SubResource("AtlasTexture_3uqth")
 }],
 "loop": true,
 "name": &"default",
