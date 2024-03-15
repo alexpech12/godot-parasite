@@ -91,5 +91,69 @@ func on_death_entered():
     var death_sprite = $AnimatedSprite2D.duplicate()
     add_sibling(death_sprite)
     death_sprite.position = position
+    death_sprite.z_index = -1
     death_sprite.play("death")
+    
+
+func inputs_random_direction():
+    var input_i = randi_range(0, 3)
+    return {
+        up = input_i == 0,
+        down = input_i == 1,
+        left = input_i == 2,
+        right = input_i == 3,
+    }
+    
+func inputs_move_to_target(target, flee_instead = false):
+    var x_diff = target.position.x - position.x
+    var y_diff = target.position.y - position.y
+    
+    var inputs = {
+        up = false,
+        down = false,
+        left = false,
+        right = false,
+    }
+
+    if absf(x_diff) > absf(y_diff):
+        if x_diff > 0: inputs['right'] = true
+        else: inputs['left'] = true
+    else:
+        if y_diff > 0: inputs['down'] = true
+        else: inputs['up'] = true
+        
+    if flee_instead:
+        inputs = { 
+            up = inputs.down, 
+            down = inputs.up, 
+            left = inputs.right, 
+            right = inputs.left
+        }
+
+    return inputs
+                
+func find_closest_creature(type):
+    var min_distance = 9999999
+    var min_target = null
+    for child in get_tree().root.find_children('', type, true, false):
+        if child == self:
+            continue
+        var distance = absf(child.position.x - position.x) + absf(child.position.y - position.y)
+        if distance < min_distance:
+            min_distance = distance
+            min_target = child
+    
+    return [min_target, min_distance]
+    
+func find_closest_monster_or_player():
+    var result = find_closest_creature("Monster")
+    var closest = result[0]
+    var min_distance = result[1]
+
+    if is_instance_valid(player):
+        var player_distance = absf(player.position.x - position.x) + absf(player.position.y - position.y)
+        if player_distance < min_distance:
+            closest = player
+            
+    return closest
     

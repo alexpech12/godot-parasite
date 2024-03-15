@@ -1,5 +1,5 @@
 extends Node2D
-@export var transition_time = 1.0
+@export var transition_time = 0.3
 @export var player: Player
 @export var ui: UI
 @export var room_scene: PackedScene

@@ -8,21 +8,18 @@ func get_inputs(delta):
     var inputs = {}
     
     if wait_time == null:
-        wait_time = randi_range(1,3)
+        #wait_time = randi_range(1,3)
+        wait_time = 1
         
     t += delta
     
     if t > wait_time:
-        
-    #if randf() < chance_of_movement:
-        # Pick a random direction to try and move
-        var input_i = randi_range(0, 3)
-        inputs = {
-            up = input_i == 0,
-            down = input_i == 1,
-            left = input_i == 2,
-            right = input_i == 3,
-        }
+        # Move towards closest creature or player
+        var target = find_closest_monster_or_player()
+        if target:
+            inputs = inputs_move_to_target(target)
+        else:
+            inputs = inputs_random_direction()
         t = 0
         wait_time = null
         

@@ -52,7 +52,8 @@ animations = [{
 
 [node name="MonsterJuvenile" instance=ExtResource("1_bby1n")]
 script = ExtResource("2_coiic")
+health = 3
+damage = 3
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_26xsp")
-animation = &"death"

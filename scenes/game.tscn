@@ -12,7 +12,7 @@ script = ExtResource("1_girdn")
 player = NodePath("Player")
 ui = NodePath("UI")
 room_scene = ExtResource("2_crknf")
-starting_room_override = "res://levels/test/enemies.txt"
+starting_room_override = "res://levels/test/enemies03.txt"
 
 [node name="Level" parent="." instance=ExtResource("2_xmhvx")]
 generate_debug = false

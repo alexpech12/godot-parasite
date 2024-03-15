@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cw27jbgutev8y"]
+[gd_scene load_steps=9 format=3 uid="uid://cw27jbgutev8y"]
 
 [ext_resource type="PackedScene" uid="uid://bx6ejmm0gw07c" path="res://scenes/enemies/base_creature.tscn" id="1_x12ud"]
+[ext_resource type="Script" path="res://scenes/enemies/MonsterAdult.gd" id="2_4bg52"]
 [ext_resource type="Texture2D" uid="uid://b13qtv66us7c5" path="res://images/monsters.png" id="2_kxypt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1x13t"]
@@ -50,8 +51,9 @@ animations = [{
 }]
 
 [node name="MonsterAdult" instance=ExtResource("1_x12ud")]
+script = ExtResource("2_4bg52")
 health = 5
+damage = 5
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_c6wf0")
-animation = &"death"
