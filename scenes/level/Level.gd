@@ -30,6 +30,7 @@ class RoomDefinition:
         Direction.Left: null,
         Direction.Right: null,
     }
+    var filename: String
     
     static func key_for_location(x, y):
         return str(x) + "," + str(y)
@@ -77,6 +78,7 @@ class RoomDefinition:
             other_room.connections[Direction.Left] = self
         else:
             assert(false, "Room at " + str(other_room.location) + " is not adjacent to current room at " + str(location))
+            
         
 
 var rooms = {}
@@ -107,6 +109,7 @@ func _ready():
         generate()
 
 func generate():
+    print_debug("GENERATING!")
     var result = null
     while result != 'OK':
         rooms = {}
@@ -130,6 +133,12 @@ func generate_level():
         var random_room = rooms[random_room_key]
         add_random_path(random_room, secondary_path_length, RoomType.Treasure)
         
+    # For each room definition, find a random room that fits the definition
+    for key in rooms:
+        var room = rooms[key]
+        var filename = find_random_matching_file(room)
+        room.filename = filename
+
     return 'OK'
 
         
@@ -211,6 +220,31 @@ func add_room(location: Vector2i, type = RoomType.Normal, connect_to_focussed = 
     if connect_to_focussed:
         focussed_room.connect_room(room)
     return room
+    
+func find_random_matching_file(room_definition):
+    # Find file matching definition
+    # Path format is res://levels/{type}/{n?}{e?}{w?}{s?}/*
+    # Or, res://levels/{type}/* for a level without specific connections
+    var selected_file = null
+    var path = "res://levels/%s/%s/" % [
+        room_definition.type_string(), 
+        room_definition.connections_string()
+        ]
+    var dir = DirAccess.open(path)
+    if not dir:
+        path = "res://levels/%s" % room_definition.type_string()
+        print_debug("Using backup path ", path)
+        dir = DirAccess.open(path)
+        print_debug(dir)
+        
+    var file_list = dir.get_files()
+    var selection = (randi() % file_list.size()) + 1
+    var file_name = "%02d.txt" % selection
+    selected_file = "%s/%s" % [path,file_name]
+        
+    print_debug("Using ", selected_file)
+    
+    return selected_file
     
     
     

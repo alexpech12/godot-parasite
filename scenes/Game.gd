@@ -31,31 +31,6 @@ func _ready():
     
     player.enter_room(current_room)
     
-func find_random_matching_file(room_definition):
-    # Find file matching definition
-    # Path format is res://levels/{type}/{n?}{e?}{w?}{s?}/*
-    # Or, res://levels/{type}/* for a level without specific connections
-    var selected_file = null
-    var path = "res://levels/%s/%s/" % [
-        room_definition.type_string(), 
-        room_definition.connections_string()
-        ]
-    var dir = DirAccess.open(path)
-    if not dir:
-        path = "res://levels/%s" % room_definition.type_string()
-        print_debug("Using backup path ", path)
-        dir = DirAccess.open(path)
-        print_debug(dir)
-        
-    var file_list = dir.get_files()
-    var selection = (randi() % file_list.size()) + 1
-    var file_name = "%02d.txt" % selection
-    selected_file = "%s/%s" % [path,file_name]
-        
-    print_debug("Using ", selected_file)
-    
-    return selected_file
-    
 func load_room_from_file(room_definition, filename):
     # Instantiate room
     var room = room_scene.instantiate()
@@ -82,7 +57,8 @@ func load_room_from_file(room_definition, filename):
     current_room = room
     
 func load_room(room_definition):
-    var filename = find_random_matching_file(room_definition)
+    #var filename = find_random_matching_file(room_definition)
+    var filename = room_definition.filename
     load_room_from_file(room_definition, filename)
 
 func _process(delta):

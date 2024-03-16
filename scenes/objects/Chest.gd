@@ -13,6 +13,7 @@ func _ready():
 func _on_area_entered(area):
     if item_taken:
         return
+    item_taken = true
 
     open.emit()
     $AnimatedSprite2D.play("open")
