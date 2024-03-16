@@ -18,7 +18,8 @@ var Symbol = {
     Player = 'P',
     Entrance = 'E',
     Exit = 'G',
-    Torch = 'T',
+    Torch = 'Y',
+    Treasure = 'T',
     ParasiteBaby = 'q',
     ParasiteJuvenile = 'w',
     ParasiteAdult = 'e',
@@ -43,6 +44,10 @@ func doors():
     
 func exit():
     return exit_node
+    
+func chest():
+    for child in find_children('', "Chest", true, false):
+        return child
 
 func _ready():
     if filepath:
@@ -67,6 +72,8 @@ func apply_file():
                     add_object("entrance", x, y)
                 Symbol.Exit:
                     add_exit(x, y)
+                Symbol.Treasure:
+                    add_treasure(x, y)
                 Symbol.ParasiteBaby:
                     add_enemy("parasite_baby", x, y)
                 Symbol.ParasiteJuvenile:
@@ -146,7 +153,12 @@ func add_exit(x, y):
     object.position = map_to_world(x, y) + Vector2(8, 8)
     object.connect("exit_reached", _on_exit_reached)
     exit_node = object
-    print_debug(exit_node)
+    
+func add_treasure(x, y):
+    var treasure_scene = load("res://scenes/objects/chest.tscn")
+    var treasure = treasure_scene.instantiate()
+    add_child(treasure)
+    treasure.position = map_to_world(x, y) + Vector2(8, 8)
     
 func add_enemy(type, x, y):
     var enemy_scene = load("res://scenes/enemies/%s.tscn" % type)

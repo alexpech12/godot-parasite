@@ -72,9 +72,11 @@ func load_room_from_file(room_definition, filename):
     for door: Door in room.doors():
         door.transition.connect(_on_room_transition)
         
-    print_debug(room.exit())
     if room.exit():
         room.exit().exit_reached.connect(_on_exit_reached)
+        
+    if room.chest():
+        room.chest().open.connect(player._on_open_chest)
         
     current_room_definition = room_definition
     current_room = room

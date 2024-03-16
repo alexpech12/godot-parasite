@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://bit1tqao865gi"]
+
+[ext_resource type="Script" path="res://scenes/objects/Chest.gd" id="1_iaseo"]
+[ext_resource type="Texture2D" uid="uid://d2nshrtetxy72" path="res://images/treasure_chest.png" id="2_hudwa"]
+[ext_resource type="PackedScene" uid="uid://bdcwneogl8xn7" path="res://scenes/items/heart.tscn" id="2_x2j2o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5d32e"]
+atlas = ExtResource("2_hudwa")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2axst"]
+atlas = ExtResource("2_hudwa")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8mco4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5d32e")
+}],
+"loop": true,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2axst")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_211v5"]
+radius = 7.0
+
+[node name="Chest" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_iaseo")
+item_scene = ExtResource("2_x2j2o")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_8mco4")
+animation = &"closed"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_211v5")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -150,4 +150,8 @@ func attack():
     
     attack_cooldown = attack_time
     
+func _on_open_chest():
+    health += 1
+    health_changed.emit(health)
+    
     
