@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3mtf2sr565pf"]
+[gd_scene load_steps=7 format=3 uid="uid://d3mtf2sr565pf"]
 
 [ext_resource type="SpriteFrames" uid="uid://txrqvsjo8l4o" path="res://scenes/enemies/parasite_baby.tres" id="1_dv7p1"]
 [ext_resource type="Script" path="res://scenes/Intro.gd" id="1_vfoca"]
 [ext_resource type="Script" path="res://scripts/PlayAnimation.gd" id="2_3b522"]
 [ext_resource type="SpriteFrames" uid="uid://byornn4n685ng" path="res://scenes/player/player.tres" id="4_ir8as"]
+[ext_resource type="SpriteFrames" uid="uid://bul1pacxjom2y" path="res://scenes/enemies/monster_baby.tres" id="5_5m106"]
+[ext_resource type="SpriteFrames" uid="uid://bkxqaq0k5c4eq" path="res://scenes/enemies/monster_juvenile.tres" id="6_2nnch"]
 
 [node name="Intro" type="Node2D"]
 script = ExtResource("1_vfoca")
@@ -17,6 +19,7 @@ offset_bottom = 200.0
 color = Color(0.129412, 0.129412, 0.129412, 1)
 
 [node name="Part1" type="Node2D" parent="."]
+visible = false
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Part1"]
 offset_right = 288.0
@@ -83,9 +86,37 @@ animation = &"idle_down"
 script = ExtResource("2_3b522")
 
 [node name="Part4" type="Node2D" parent="."]
-visible = false
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Part4"]
+offset_right = 288.0
+offset_bottom = 192.0
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[center]
+The parasites will attempt to consume anything they can to multiply, including the local fauna.
+
+Don't let them!
+[/center]"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Part4"]
+position = Vector2(96, 160)
+scale = Vector2(4, 4)
+sprite_frames = ExtResource("5_5m106")
+animation = &"idle"
+flip_h = true
+script = ExtResource("2_3b522")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Part4"]
+position = Vector2(176, 160)
+scale = Vector2(4, 4)
+sprite_frames = ExtResource("6_2nnch")
+animation = &"idle"
+script = ExtResource("2_3b522")
+
+[node name="Part5" type="Node2D" parent="."]
+visible = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Part5"]
 offset_right = 288.0
 offset_bottom = 192.0
 theme_override_font_sizes/normal_font_size = 12

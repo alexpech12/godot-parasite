@@ -9,6 +9,7 @@ func _on_main_menu_start_game():
     $MainMenu.active = false
     
     $Intro.visible = true
+    await get_tree().process_frame
     $Intro.active = true
 
 func _on_intro_complete():

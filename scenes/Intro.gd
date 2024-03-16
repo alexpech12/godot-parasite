@@ -11,7 +11,8 @@ func _ready():
         $Part1,
         $Part2,
         $Part3,
-        $Part4
+        $Part4,
+        $Part5
     ]
     
     for page in pages:

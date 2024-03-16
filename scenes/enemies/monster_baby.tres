@@ -1,0 +1,49 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://bul1pacxjom2y"]
+
+[ext_resource type="Texture2D" uid="uid://b13qtv66us7c5" path="res://images/monsters.png" id="1_blcok"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sswoh"]
+atlas = ExtResource("1_blcok")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_042ec"]
+atlas = ExtResource("1_blcok")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hk4bo"]
+atlas = ExtResource("1_blcok")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_svhht"]
+atlas = ExtResource("1_blcok")
+region = Rect2(32, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sswoh")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_042ec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hk4bo")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_svhht")
+}],
+"loop": true,
+"name": &"step",
+"speed": 5.0
+}]

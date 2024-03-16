@@ -1,53 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://oji60adkemva"]
+[gd_scene load_steps=4 format=3 uid="uid://oji60adkemva"]
 
 [ext_resource type="Script" path="res://scenes/enemies/MonsterBaby.gd" id="1_p136d"]
-[ext_resource type="Texture2D" uid="uid://b13qtv66us7c5" path="res://images/monsters.png" id="2_7w44j"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sswoh"]
-atlas = ExtResource("2_7w44j")
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_042ec"]
-atlas = ExtResource("2_7w44j")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hk4bo"]
-atlas = ExtResource("2_7w44j")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_svhht"]
-atlas = ExtResource("2_7w44j")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_idfgp"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sswoh")
-}],
-"loop": true,
-"name": &"death",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_042ec")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hk4bo")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 1.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_svhht")
-}],
-"loop": true,
-"name": &"step",
-"speed": 5.0
-}]
+[ext_resource type="SpriteFrames" uid="uid://bul1pacxjom2y" path="res://scenes/enemies/monster_baby.tres" id="2_xlu8c"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5owua"]
 radius = 7.0
@@ -58,7 +12,7 @@ collision_mask = 15
 script = ExtResource("1_p136d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_idfgp")
+sprite_frames = ExtResource("2_xlu8c")
 animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
