@@ -1,12 +1,12 @@
 XXXXX  XXXXX
+X X  X  X  X
+X     a    X
+X  q    a XX
+X       X  X
+   X        
+      X     
 X          X
-X      a   X
-X  q       X
-X          X
-            
-            
-X  a       X
-X       q  X
-X          X
-X          X
+XX a  X    X
+X  X  q   XX
+X    X   aXX
 XXXXX  XXXXX
