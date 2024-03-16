@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://b1nrb0xrbb3qr"]
+[gd_scene load_steps=10 format=3 uid="uid://b1nrb0xrbb3qr"]
 
 [ext_resource type="PackedScene" uid="uid://bx6ejmm0gw07c" path="res://scenes/enemies/base_creature.tscn" id="1_cs01x"]
 [ext_resource type="Texture2D" uid="uid://c6d52qmbpp5de" path="res://images/parasites.png" id="2_eq8qc"]
 [ext_resource type="Script" path="res://scenes/enemies/ParasiteAdult.gd" id="2_txaxd"]
+[ext_resource type="PackedScene" uid="uid://cunve575cu724" path="res://scenes/enemies/para_projectile.tscn" id="3_c862u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_etyok"]
 atlas = ExtResource("2_eq8qc")
@@ -52,6 +53,10 @@ animations = [{
 
 [node name="ParasiteAdult" instance=ExtResource("1_cs01x")]
 script = ExtResource("2_txaxd")
+min_ranged_distance = 6
+max_melee_distance = 4
+turn_wait_time = 0.5
+projectile_scene = ExtResource("3_c862u")
 duplication_energy = 1
 health = 5
 damage = 3

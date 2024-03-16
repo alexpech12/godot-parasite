@@ -1,4 +1,4 @@
-class_name Projectile
+class_name ParaProjectile
 
 extends Area2D
 
@@ -7,8 +7,9 @@ extends Area2D
 
 var direction = Vector2.ZERO
 
-func ready():
+func _ready():
     direction = Vector2.ZERO
+    $AnimatedSprite2D.play()
 
 func _process(delta):
     position += direction * speed
