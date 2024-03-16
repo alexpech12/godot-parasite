@@ -24,4 +24,5 @@ projectile = NodePath("../Projectile")
 
 [node name="Projectile" parent="." instance=ExtResource("5_cwbui")]
 
+[connection signal="game_over" from="Player" to="." method="_on_player_game_over"]
 [connection signal="health_changed" from="Player" to="UI" method="_on_player_health_changed"]

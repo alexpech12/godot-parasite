@@ -6,6 +6,8 @@ extends Node2D
  
 @export var starting_room_override: String
 
+signal game_over
+
 enum TransitionState { None, FadingOut, Loading, FadingIn }
 var transition_state = TransitionState.None
 var transition_scene: PackedScene
@@ -115,3 +117,7 @@ func _on_room_transition(destination, player_location):
     transition_location = player_location
     player.exit_room(current_room)
 
+
+
+func _on_player_game_over():
+    game_over.emit()

@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2rvuwmm1u48x"]
+
+[ext_resource type="SpriteFrames" uid="uid://byornn4n685ng" path="res://scenes/player/player.tres" id="1_7htxw"]
+[ext_resource type="Script" path="res://scenes/GameOver.gd" id="1_g1poe"]
+
+[node name="GameOver" type="Node2D"]
+z_index = 1000
+script = ExtResource("1_g1poe")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 296.0
+offset_bottom = 200.0
+color = Color(0.129412, 0.129412, 0.129412, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_top = 64.0
+offset_right = 288.0
+offset_bottom = 128.0
+theme_override_colors/default_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]GAME OVER[/center]"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(144, 152)
+scale = Vector2(4, 4)
+sprite_frames = ExtResource("1_7htxw")
+animation = &"death"
