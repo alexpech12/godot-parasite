@@ -17,6 +17,7 @@ func _on_intro_complete():
     $Intro.active = false
     
     game = game_scene.instantiate()
+    game.starting_room_override = ''
     add_child(game)
     game.connect("game_over", _on_game_over)
     game.connect("exit_reached", _on_exit_reached)

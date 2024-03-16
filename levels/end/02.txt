@@ -1,0 +1,12 @@
+XXXXX  XXXXX
+X          X
+X YXXXXX Y X
+X X      X X
+X X YXXY X X
+  X X    X  
+  X X GX X  
+X X YXXY X X
+X X      X X
+X Y XXXXXY X
+X          X
+XXXXX  XXXXX
