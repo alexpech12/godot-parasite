@@ -6,11 +6,19 @@ var game: Node2D
 
 func _on_main_menu_start_game():
     $MainMenu.visible = false
-        
+    $MainMenu.active = false
+    
+    $Intro.visible = true
+    $Intro.active = true
+
+func _on_intro_complete():
+    $Intro.visible = false
+    $Intro.active = false
+    
     game = game_scene.instantiate()
     add_child(game)
     game.connect("game_over", _on_game_over)
-    
+
 func _on_game_over():
     await get_tree().create_timer(3).timeout
     $GameOver.visible = true

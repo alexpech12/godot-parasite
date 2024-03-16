@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0j01yb7sufjk"]
+[gd_scene load_steps=6 format=3 uid="uid://c0j01yb7sufjk"]
 
 [ext_resource type="Script" path="res://scenes/Main.gd" id="1_o6ale"]
 [ext_resource type="PackedScene" uid="uid://owk4twgt6bkv" path="res://scenes/main_menu.tscn" id="2_pllbp"]
 [ext_resource type="PackedScene" uid="uid://cgxg32ixv4mmv" path="res://scenes/game.tscn" id="2_v76h7"]
 [ext_resource type="PackedScene" uid="uid://c2rvuwmm1u48x" path="res://scenes/game_over.tscn" id="4_xh08m"]
+[ext_resource type="PackedScene" uid="uid://d3mtf2sr565pf" path="res://scenes/intro.tscn" id="5_kn8xe"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_o6ale")
@@ -14,5 +15,10 @@ game_scene = ExtResource("2_v76h7")
 [node name="GameOver" parent="." instance=ExtResource("4_xh08m")]
 visible = false
 
+[node name="Intro" parent="." instance=ExtResource("5_kn8xe")]
+visible = false
+active = false
+
 [connection signal="start_game" from="MainMenu" to="." method="_on_main_menu_start_game"]
 [connection signal="restart_game" from="GameOver" to="." method="_on_game_over_restart_game"]
+[connection signal="complete" from="Intro" to="." method="_on_intro_complete"]
