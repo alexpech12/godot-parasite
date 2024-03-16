@@ -10,12 +10,15 @@ var definition: Level.RoomDefinition
 var ROOM_SIZE = 12
 
 signal transition(scene: String, player_location: Vector2)
+signal exit_reached
+var exit_node: Node2D
 
 var Symbol = {
     Wall = 'X',
     Player = 'P',
     Entrance = 'E',
     Exit = 'G',
+    Torch = 'T',
     ParasiteBaby = 'q',
     ParasiteJuvenile = 'w',
     ParasiteAdult = 'e',
@@ -37,6 +40,9 @@ func doors():
         $DoorLeft,
         $DoorRight
     ]
+    
+func exit():
+    return exit_node
 
 func _ready():
     if filepath:
@@ -55,6 +61,12 @@ func apply_file():
             match row[x]:
                 Symbol.Wall:
                     add_wall(x, y)
+                Symbol.Torch:
+                    add_object("torch", x, y)
+                Symbol.Entrance:
+                    add_object("entrance", x, y)
+                Symbol.Exit:
+                    add_exit(x, y)
                 Symbol.ParasiteBaby:
                     add_enemy("parasite_baby", x, y)
                 Symbol.ParasiteJuvenile:
@@ -111,11 +123,30 @@ func apply_definition():
 func _on_door_transition(scene, player_location):
     transition.emit(scene, player_location)
     
+func _on_exit_reached():
+    print_debug("_on_exit_reached")
+    exit_reached.emit()
+    
 func get_tilemap():
     return $TileMap
     
 func add_wall(x, y):
     $TileMap.set_cells_terrain_connect (0, [Vector2i(3+x, y)], 0, 0)
+    
+func add_object(type, x, y):
+    var object_scene = load("res://scenes/objects/%s.tscn" % type)
+    var object = object_scene.instantiate()
+    add_child(object)
+    object.position = map_to_world(x, y) + Vector2(8, 8)
+    
+func add_exit(x, y):
+    var object_scene = load("res://scenes/objects/exit.tscn")
+    var object = object_scene.instantiate()
+    add_child(object)
+    object.position = map_to_world(x, y) + Vector2(8, 8)
+    object.connect("exit_reached", _on_exit_reached)
+    exit_node = object
+    print_debug(exit_node)
     
 func add_enemy(type, x, y):
     var enemy_scene = load("res://scenes/enemies/%s.tscn" % type)

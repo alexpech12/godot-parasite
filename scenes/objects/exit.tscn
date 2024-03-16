@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://daj7ohjxunajy"]
+
+[ext_resource type="Script" path="res://scenes/objects/Exit.gd" id="1_01lf4"]
+[ext_resource type="Texture2D" uid="uid://b4os5v1bfcreh" path="res://images/exit.png" id="2_1g5um"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5aacm"]
+atlas = ExtResource("2_1g5um")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r3xg3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5aacm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_211v5"]
+radius = 7.0
+
+[node name="Exit" type="Area2D"]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_01lf4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_r3xg3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_211v5")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

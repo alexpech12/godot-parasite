@@ -19,6 +19,7 @@ func _on_intro_complete():
     game = game_scene.instantiate()
     add_child(game)
     game.connect("game_over", _on_game_over)
+    game.connect("exit_reached", _on_exit_reached)
 
 func _on_game_over():
     await get_tree().create_timer(3).timeout
@@ -27,4 +28,12 @@ func _on_game_over():
     game.visible = false
 
 func _on_game_over_restart_game():
+    get_tree().reload_current_scene()
+    
+func _on_exit_reached():
+    game.visible = false
+    $WinScreen.visible = true
+    $WinScreen.active = true
+    
+func _on_win_screen_restart_game():
     get_tree().reload_current_scene()

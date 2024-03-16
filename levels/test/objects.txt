@@ -1,0 +1,12 @@
+XXXXX  XXXXX
+X   T  T   X
+X X      X X
+X    TGT   X
+XT        TX
+     P      
+      E    
+XT        TX
+X          X
+X X   P  X X
+X   T  T   X
+XXXXX  XXXXX

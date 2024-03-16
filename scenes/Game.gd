@@ -7,6 +7,7 @@ extends Node2D
 @export var starting_room_override: String
 
 signal game_over
+signal exit_reached
 
 enum TransitionState { None, FadingOut, Loading, FadingIn }
 var transition_state = TransitionState.None
@@ -71,6 +72,10 @@ func load_room_from_file(room_definition, filename):
     for door: Door in room.doors():
         door.transition.connect(_on_room_transition)
         
+    print_debug(room.exit())
+    if room.exit():
+        room.exit().exit_reached.connect(_on_exit_reached)
+        
     current_room_definition = room_definition
     current_room = room
     
@@ -116,6 +121,10 @@ func _on_room_transition(destination, player_location):
     transition_destination = destination
     transition_location = player_location
     player.exit_room(current_room)
+    
+func _on_exit_reached():
+    print_debug("_on_exit_reached")
+    exit_reached.emit()
 
 
 
