@@ -22,6 +22,7 @@ active = false
 
 [node name="WinScreen" parent="." instance=ExtResource("6_o5nqk")]
 visible = false
+z_index = 1000
 
 [connection signal="start_game" from="MainMenu" to="." method="_on_main_menu_start_game"]
 [connection signal="restart_game" from="GameOver" to="." method="_on_game_over_restart_game"]
