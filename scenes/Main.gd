@@ -17,7 +17,7 @@ func _on_intro_complete():
     $Intro.active = false
     
     game = game_scene.instantiate()
-    game.starting_room_override = ''
+    game.starting_room_override = 'res://levels/test/objects.txt'
     add_child(game)
     game.connect("game_over", _on_game_over)
     game.connect("exit_reached", _on_exit_reached)
@@ -32,7 +32,9 @@ func _on_game_over_restart_game():
     get_tree().reload_current_scene()
     
 func _on_exit_reached():
-    game.visible = false
+    #game.visible = false
+    game.hide()
+    game.ui.hide()
     $WinScreen.visible = true
     $WinScreen.active = true
     

@@ -20,7 +20,7 @@ var t = 0.0
 var current_room: Node2D
 
 var current_room_definition: Level.RoomDefinition
-
+    
 func _ready():
     $Level.generate()
     
