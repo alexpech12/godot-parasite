@@ -17,6 +17,6 @@ offset_top = 40.0
 offset_right = 288.0
 offset_bottom = 128.0
 bbcode_enabled = true
-text = "[center]Congratulations! 
+text = "[center]You've reached the end... for now
 
-More coming soon...[/center]"
+More levels, enemies, and bosses in development![/center]"

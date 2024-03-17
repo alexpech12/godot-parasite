@@ -10,10 +10,12 @@ config_version=5
 
 [application]
 
-config/name="Parasite"
-run/main_scene="res://scenes/test_scene.tscn"
+config/name="SuperInoculator"
+run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
+boot_splash/image="res://images/gwj/splash.png"
 config/icon="res://icon.svg"
+boot_splash/minimum_display_time=5000
 
 [display]
 
