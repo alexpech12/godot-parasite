@@ -134,6 +134,9 @@ func attacking():
     return attack_cooldown > 0
     
 func attack():
+    if not tilemap:
+        return
+        
     print_debug("Attacking!")
     #var p = projectile.instantiate()
     var p = projectile.duplicate()

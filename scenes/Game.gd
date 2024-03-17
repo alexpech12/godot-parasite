@@ -6,14 +6,19 @@ extends Node2D
  
 @export var starting_room_override: String
 
+@export var levels: Array[LevelConfig]
+var current_level = 0
+
 signal game_over
 signal exit_reached
+signal game_won
 
 enum TransitionState { None, FadingOut, Loading, FadingIn }
 var transition_state = TransitionState.None
 var transition_scene: PackedScene
 var transition_location: Vector2
-var transition_destination: Vector2i
+#var transition_destination: Vector2i
+var next_room: Level.RoomDefinition
 
 var t = 0.0
 
@@ -22,14 +27,19 @@ var current_room: Node2D
 var current_room_definition: Level.RoomDefinition
     
 func _ready():
+    start_level()
+    
+func start_level():
+    var level_config = levels[current_level]
+    $Level.configure(level_config)
     $Level.generate()
-    
-    if starting_room_override:
-        load_room_from_file($Level.starting_room(), starting_room_override)
-    else:
-        load_room($Level.starting_room())
-    
-    player.enter_room(current_room)
+    next_room = $Level.starting_room()
+    transition_state = TransitionState.Loading
+    ui.set_curtain_alpha(1.0)
+    $LevelLabel.show()
+    $LevelLabel.set_text("[center]Level 1-%s[/center]" % (current_level+1))
+    await get_tree().create_timer(5).timeout
+    $LevelLabel.hide()
     
 func load_room_from_file(room_definition, filename):
     # Instantiate room
@@ -72,14 +82,17 @@ func _process(delta):
                 ui.set_curtain_alpha(1.0)
                 
         TransitionState.Loading:
-            current_room.queue_free()
+            if current_room:
+                current_room.queue_free()
             
-            var destination_room_definition = $Level.get_room(transition_destination)
+            #var destination_room_definition = $Level.get_room(transition_destination)
             
-            load_room(destination_room_definition)
+            #load_room(destination_room_definition)
+            load_room(next_room)
             
             transition_state = TransitionState.FadingIn
-            player.position = transition_location
+            if transition_location:
+                player.position = transition_location
             
         TransitionState.FadingIn:
             t += delta
@@ -96,13 +109,21 @@ func _on_room_transition(destination, player_location):
         return
     
     transition_state = TransitionState.FadingOut
-    transition_destination = destination
+    #transition_destination = destination
+    next_room = $Level.get_room(destination)
     transition_location = player_location
     player.exit_room(current_room)
     
 func _on_exit_reached():
     print_debug("_on_exit_reached")
+    
     exit_reached.emit()
+    
+    current_level += 1
+    if current_level >= levels.size():
+        game_won.emit()
+    else:
+        start_level()
 
 
 

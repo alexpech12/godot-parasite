@@ -2,7 +2,6 @@ class_name Level
 
 extends Node2D
 
-#@export var room_count = 10
 @export var main_path_length = 10
 @export var secondary_path_count = 2
 @export var secondary_path_length = 3
@@ -107,6 +106,11 @@ func get_room(location: Vector2i) -> RoomDefinition:
 func _ready():
     if generate_on_ready:
         generate()
+
+func configure(level_config: LevelConfig):
+    main_path_length = level_config.main_path_length
+    secondary_path_count = level_config.secondary_path_count
+    secondary_path_length = level_config.secondary_path_count
 
 func generate():
     print_debug("GENERATING!")

@@ -1,11 +1,36 @@
-[gd_scene load_steps=7 format=3 uid="uid://cgxg32ixv4mmv"]
+[gd_scene load_steps=12 format=3 uid="uid://cgxg32ixv4mmv"]
 
 [ext_resource type="Script" path="res://scenes/Game.gd" id="1_girdn"]
 [ext_resource type="PackedScene" uid="uid://cgmedisd8jjpd" path="res://scenes/room/room.tscn" id="2_crknf"]
 [ext_resource type="PackedScene" uid="uid://b353btab7e6eo" path="res://scenes/level/level.tscn" id="2_xmhvx"]
+[ext_resource type="Script" path="res://scripts/LevelConfig.gd" id="3_id4vf"]
 [ext_resource type="PackedScene" uid="uid://b8yjady50laal" path="res://scenes/ui/ui.tscn" id="3_r17wv"]
 [ext_resource type="PackedScene" uid="uid://bbrc31qpmoqku" path="res://scenes/player/player.tscn" id="4_nbtyo"]
 [ext_resource type="PackedScene" uid="uid://dfyye551d3ash" path="res://scenes/projectile/projectile.tscn" id="5_cwbui"]
+
+[sub_resource type="Resource" id="Resource_ojslc"]
+script = ExtResource("3_id4vf")
+main_path_length = 5
+secondary_path_count = 2
+secondary_path_length = 2
+
+[sub_resource type="Resource" id="Resource_ruwwa"]
+script = ExtResource("3_id4vf")
+main_path_length = 6
+secondary_path_count = 3
+secondary_path_length = 2
+
+[sub_resource type="Resource" id="Resource_wjebs"]
+script = ExtResource("3_id4vf")
+main_path_length = 8
+secondary_path_count = 3
+secondary_path_length = 3
+
+[sub_resource type="Resource" id="Resource_vs8vx"]
+script = ExtResource("3_id4vf")
+main_path_length = 10
+secondary_path_count = 3
+secondary_path_length = 4
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("player", "ui")]
 script = ExtResource("1_girdn")
@@ -13,6 +38,7 @@ player = NodePath("Player")
 ui = NodePath("UI")
 room_scene = ExtResource("2_crknf")
 starting_room_override = "res://levels/test/objects.txt"
+levels = Array[ExtResource("3_id4vf")]([SubResource("Resource_ojslc"), SubResource("Resource_ruwwa"), SubResource("Resource_wjebs"), SubResource("Resource_vs8vx")])
 
 [node name="Level" parent="." instance=ExtResource("2_xmhvx")]
 generate_debug = false
@@ -24,6 +50,14 @@ z_index = 10
 projectile = NodePath("../Projectile")
 
 [node name="Projectile" parent="." instance=ExtResource("5_cwbui")]
+
+[node name="LevelLabel" type="RichTextLabel" parent="."]
+offset_top = 24.0
+offset_right = 288.0
+offset_bottom = 64.0
+theme_override_colors/default_color = Color(0.890196, 0.372549, 0.168627, 1)
+bbcode_enabled = true
+text = "[center]Level 0-0[/center]"
 
 [connection signal="game_over" from="Player" to="." method="_on_player_game_over"]
 [connection signal="health_changed" from="Player" to="UI" method="_on_player_health_changed"]

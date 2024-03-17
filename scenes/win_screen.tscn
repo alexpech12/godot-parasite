@@ -13,11 +13,13 @@ offset_bottom = 200.0
 color = Color(0.129412, 0.129412, 0.129412, 1)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_top = 40.0
+offset_top = 8.0
 offset_right = 288.0
-offset_bottom = 128.0
+offset_bottom = 192.0
 bbcode_enabled = true
-text = "[center]You've reached the end... for now
+text = "[center]Boss fight coming soon...
 
-More levels, enemies, and bosses in development![/center]"
+For now, you've reached the end of your adventure.
+
+Play again for a new randomly generated dungeon![/center]"
 scroll_active = false

@@ -20,7 +20,7 @@ func _on_intro_complete():
     game.starting_room_override = '' # 'res://levels/test/objects.txt'
     add_child(game)
     game.connect("game_over", _on_game_over)
-    game.connect("exit_reached", _on_exit_reached)
+    game.connect("game_won", _on_game_won)
 
 func _on_game_over():
     await get_tree().create_timer(3).timeout
@@ -31,7 +31,7 @@ func _on_game_over():
 func _on_game_over_restart_game():
     get_tree().reload_current_scene()
     
-func _on_exit_reached():
+func _on_game_won():
     game.hide()
     game.ui.hide()
     $WinScreen.visible = true
